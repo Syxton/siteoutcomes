@@ -226,7 +226,7 @@ if ($mform->is_submitted() && !empty($outcomeid)) {
                                '<strong>' . $course->fullname . "</strong><br /><br />" . $avghtml . "</td>\n";
 
             $html .= $outcomeavghtml . $itemshtml;
-            $row++;   
+            $row++;
         }
 
         $html .= '</table><br /><br />';
