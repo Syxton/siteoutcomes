@@ -87,12 +87,12 @@ if ($mform->is_submitted() && !empty($outcomeid)) {
                                              "outcomeid = ? AND courseid = ? $datesql",
                                              array($outcomeid, $course->courseid));
         if (!empty($checkthis)) {
-            $report_items[$course->courseid] = $checkthis;
+            $reportitems[$course->courseid] = $checkthis;
         }
 
         // Get average grades for each item.
-        if (!empty($report_items[$course->courseid]) && is_array($report_items[$course->courseid])) {
-            foreach ($report_items[$course->courseid] as $itemid => $item) {
+        if (!empty($reportitems[$course->courseid]) && is_array($reportitems[$course->courseid])) {
+            foreach ($reportitems[$course->courseid] as $itemid => $item) {
                 $params = array();
                 $hidesuspendedsql = '';
                 if ($showonlyactiveenrol && !empty($suspendedusers)) {
@@ -110,7 +110,7 @@ if ($mform->is_submitted() && !empty($outcomeid)) {
                 $info = $DB->get_records_sql($sql, $params);
 
                 if (!$info) {
-                    unset($report_items[$course->courseid][$itemid]);
+                    unset($reportitems[$course->courseid][$itemid]);
                     continue;
                 } else {
                     $info = reset($info);
@@ -118,16 +118,16 @@ if ($mform->is_submitted() && !empty($outcomeid)) {
                     $count = $info->count;
                 }
 
-                $report_items[$course->courseid][$itemid]->avg = $avg;
-                $report_items[$course->courseid][$itemid]->count = $count;
+                $reportitems[$course->courseid][$itemid]->avg = $avg;
+                $reportitems[$course->courseid][$itemid]->count = $count;
             }
         }
 
-        if (empty($report_items[$course->courseid])) {
-            unset($report_items[$course->courseid]);
+        if (empty($reportitems[$course->courseid])) {
+            unset($reportitems[$course->courseid]);
         } else {
              // Merge outcomes data.
-            $reportinfo["items"] += $report_items;
+            $reportinfo["items"] += $reportitems;
         }
     }
 
@@ -171,10 +171,12 @@ if ($mform->is_submitted() && !empty($outcomeid)) {
                         $row++;
                         $itemshtml .= "<tr class=\"r$row\">\n";
                     }
-        
+
                     if ($item->itemtype == 'mod') {
                         $cm = get_coursemodule_from_instance($item->itemmodule, $item->iteminstance, $item->courseid);
-                        $itemname = '<a href="'.$CFG->wwwroot.'/mod/'.$item->itemmodule.'/view.php?id='.$cm->id.'">'.format_string($cm->name, true, $cm->course).'</a>';
+                        $itemname = '<a href="' . $CFG->wwwroot . '/mod/'.$item->itemmodule.'/view.php?id='.$cm->id.'">' .
+                                        format_string($cm->name, true, $cm->course) .
+                                    '</a>';
                     } else {
                         $gradeitem = new grade_item($item, false);
                         $itemname = $gradeitem->get_name();
@@ -220,10 +222,10 @@ if ($mform->is_submitted() && !empty($outcomeid)) {
             }
 
             $reportinfo["categoryavgs"][$course->category][] = array('avg' => $avg, 'count' => $coursegradecount);
-            $outcomeavg_html = '<td class="cell c1" rowspan="' . $rowspan . '">' .
+            $outcomeavghtml = '<td class="cell c1" rowspan="' . $rowspan . '">' .
                                '<strong>' . $course->fullname . "</strong><br /><br />" . $avghtml . "</td>\n";
 
-            $html .= $outcomeavg_html . $itemshtml;
+            $html .= $outcomeavghtml . $itemshtml;
             $row++;   
         }
 
@@ -275,7 +277,8 @@ if ($mform->is_submitted() && !empty($outcomeid)) {
 
         $html .= '</table><br /><br />';
         $html .= '<h3>Total Outcomes Report</h3>';
-        $html .= '<table class="generaltable boxaligncenter" width="90%" cellspacing="1" cellpadding="5" summary="Total Outcomes Report">' . "\n";
+        $html .= '<table class="generaltable boxaligncenter" width="90%" cellspacing="1" ' .
+                 'cellpadding="5" summary="Total Outcomes Report">' . "\n";
         $html .= '<th class="header c1" scope="col">Courses</th>';
         $html .= '<th class="header c2" scope="col">' . get_string('average', 'grades') . '</th>';
         $html .= '<th class="header c3" scope="col">' . get_string('numberofgrades', 'grades') . '</th></tr>' . "\n";
