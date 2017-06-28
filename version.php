@@ -26,5 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version   = 2017051500;            // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2017050500;            // Requires this Moodle version.
+$plugin->requires  = 2015111600;            // Requires Moodle 3.x.
+$plugin->maturity  = MATURITY_STABLE;
+$plugin->release   = '1';
 $plugin->component = 'report_siteoutcomes';
