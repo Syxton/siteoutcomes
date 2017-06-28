@@ -308,7 +308,6 @@ if ($mform->is_submitted() && !empty($outcomeid)) {
     $event->trigger();
 
 } else { // FORM
-
     $outcomeids = $DB->get_records_select_menu('grade_outcomes', "courseid IS NULL", null, 'shortname ASC', 'id, shortname');
     $outcomeids = array(0 => get_string('selectoutcome', 'report_siteoutcomes')) + $outcomeids;
 
