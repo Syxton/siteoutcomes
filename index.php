@@ -27,16 +27,16 @@ require('../../config.php');
 require_once($CFG->libdir . '/gradelib.php');
 require_once($CFG->dirroot.'/grade/lib.php');
 
+require_login();
+
 $outcomeid  = optional_param('outcomeid', 0, PARAM_INT);
 $datefrom   = optional_param_array('datefrom', array(), PARAM_INT);
 $datetill   = optional_param_array('datetill', array(), PARAM_INT);
 
-$PAGE->set_url('/report/siteoutcomes/index.php', array());
-
-require_login();
 $context = context_system::instance();
 
 $PAGE->set_context($context);
+$PAGE->set_url('/report/siteoutcomes/index.php', array());
 
 require_capability('report/siteoutcomes:view', $context);
 

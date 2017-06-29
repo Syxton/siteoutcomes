@@ -26,6 +26,8 @@
 require_once('../../config.php');
 require_once($CFG->libdir . '/csvlib.class.php');
 
+require_login();
+
 $url = new moodle_url('/report/siteoutcomes/export.php');
 $PAGE->set_url($url);
 
