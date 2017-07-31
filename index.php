@@ -37,6 +37,8 @@ $context = context_system::instance();
 
 $PAGE->set_context($context);
 $PAGE->set_url('/report/siteoutcomes/index.php', array());
+$PAGE->set_pagelayout('report');
+$PAGE->navbar->add(get_string('pluginname', 'report_siteoutcomes'));
 
 require_capability('report/siteoutcomes:view', $context);
 
