@@ -25,12 +25,17 @@
 
 $string['siteoutcomes:view'] = 'View Site Outcomes report';
 $string['addoutcome'] = 'Add an outcome';
+$string['categorytitle'] = 'Category Outcomes Report';
 $string['courseoutcomes'] = 'Site outcomes';
 $string['coursespecoutcome'] = 'Site outcomes';
+$string['coursetitle'] = 'Course Outcomes Report';
 $string['datefrom'] = 'Date from';
 $string['dateto'] = 'Date to';
 $string['eventreportviewed'] = 'Site outcomes report viewed';
+$string['outcomereport'] = 'Outcome Report';
 $string['pluginname'] = 'Site Outcomes report';
+$string['numeric'] = 'Numeric';
 $string['outcomes:view'] = 'View the site outcomes report';
 $string['selectoutcome'] = 'Select an outcome';
+$string['totaltitle'] = 'Total Outcomes Report';
 $string['usedgradeitem'] = 'Number of grade items';

@@ -135,9 +135,10 @@ if ($mform->is_submitted() && !empty($outcomeid)) {
         print_grade_page_head($COURSE->id, 'report', 'siteoutcomes', get_string('pluginname', 'report_siteoutcomes'), false, '');
         echo "No Data";
     } else {
-        $html = '<h3>Course Outcomes Report</h3>';
+        $html = '<h3>' . get_string('coursetitle', 'report_siteoutcomes') . '</h3>';
         $html .= '<table class="generaltable boxaligncenter" ' .
-                 'width="90%" cellspacing="1" cellpadding="5" summary="Course Outcomes Report">' . "\n";
+                 'width="90%" cellspacing="1" cellpadding="5" ' .
+                 'summary=" ' . get_string('coursetitle', 'report_siteoutcomes') . '">' . "\n";
         $html .= '<th class="header c1" scope="col">' . get_string('courseavg', 'grades') . '</th>';
         $html .= '<th class="header c2" scope="col">' . get_string('activities', 'grades') . '</th>';
         $html .= '<th class="header c3" scope="col">' . get_string('average', 'grades') . '</th>';
@@ -147,7 +148,7 @@ if ($mform->is_submitted() && !empty($outcomeid)) {
         $csv[$row] = array(get_string('courseavg', 'grades'),
                            get_string('activities', 'grades'),
                            get_string('average', 'grades'),
-                           get_string('average', 'grades') . " Numeric",
+                           get_string('average', 'grades') . " " . get_string('numeric', 'report_siteoutcomes'),
                            get_string('numberofgrades', 'grades'),
                            'header' => true);
 
@@ -231,20 +232,20 @@ if ($mform->is_submitted() && !empty($outcomeid)) {
 
         $html .= '</table><br /><br />';
 
-        $html .= '<h3>Category Outcomes Report</h3>';
+        $html .= '<h3>' . get_string('categorytitle', 'report_siteoutcomes') . '</h3>';
         $html .= '<table class="generaltable boxaligncenter" width="90%" cellspacing="1" cellpadding="5" ' .
-                 'summary="Category Outcomes Report">' . "\n";
-        $html .= '<th class="header c1" scope="col">Category</th>';
-        $html .= '<th class="header c2" scope="col">Courses</th>';
+                 'summary="' . get_string('categorytitle', 'report_siteoutcomes') . '">' . "\n";
+        $html .= '<th class="header c1" scope="col">' . get_string('category') . '</th>';
+        $html .= '<th class="header c2" scope="col">' . get_string('courses') . '</th>';
         $html .= '<th class="header c3" scope="col">' . get_string('average', 'grades') . '</th>';
         $html .= '<th class="header c4" scope="col">' . get_string('numberofgrades', 'grades') . '</th></tr>' . "\n";
         $row++;
-        $csv[$row] = array("Category",
-                             "Courses",
-                             get_string('average', 'grades'),
-                             get_string('average', 'grades') . " Numeric",
-                             get_string('numberofgrades', 'grades'),
-                             'header' => true);
+        $csv[$row] = array(get_string('category'),
+                           get_string('courses'),
+                           get_string('average', 'grades'),
+                           get_string('average', 'grades') . " " . get_string('numeric', 'report_siteoutcomes'),
+                           get_string('numberofgrades', 'grades'),
+                           'header' => true);
 
         $totalcourses = 0;
         $totalaverage = 0;
@@ -276,17 +277,17 @@ if ($mform->is_submitted() && !empty($outcomeid)) {
         }
 
         $html .= '</table><br /><br />';
-        $html .= '<h3>Total Outcomes Report</h3>';
+        $html .= '<h3>' . get_string('totaltitle', 'report_siteoutcomes') . '</h3>';
         $html .= '<table class="generaltable boxaligncenter" width="90%" cellspacing="1" ' .
-                 'cellpadding="5" summary="Total Outcomes Report">' . "\n";
-        $html .= '<th class="header c1" scope="col">Courses</th>';
+                 'cellpadding="5" summary="' . get_string('totaltitle', 'report_siteoutcomes') . '">' . "\n";
+        $html .= '<th class="header c1" scope="col">' . get_string('courses') . '</th>';
         $html .= '<th class="header c2" scope="col">' . get_string('average', 'grades') . '</th>';
         $html .= '<th class="header c3" scope="col">' . get_string('numberofgrades', 'grades') . '</th></tr>' . "\n";
 
         $row++;
-        $csv[$row] = array("Courses",
+        $csv[$row] = array(get_string('courses'),
                            get_string('average', 'grades'),
-                           get_string('average', 'grades') . " Numeric",
+                           get_string('average', 'grades') . " " . get_string('numeric', 'report_siteoutcomes'),
                            get_string('numberofgrades', 'grades'),
                            'header' => true);
         $totalaverage = $totalaverage / $totalcourses;
@@ -301,7 +302,8 @@ if ($mform->is_submitted() && !empty($outcomeid)) {
                              'header' => false);
         $html .= '</table>';
         echo $OUTPUT->header();
-        echo $OUTPUT->heading("\"" . $reportinfo['outcome']->shortname . "\" Outcome Report");
+        echo $OUTPUT->heading("\"" . $reportinfo['outcome']->shortname . "\" " .
+                              get_string('outcomereport', 'report_siteoutcomes'));
         $SESSION->siteoutcomes_export_values = $csv;
         echo html_writer::link(new moodle_url('export.php',
                                               array()), get_string('downloadexcel'));
