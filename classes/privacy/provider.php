@@ -13,20 +13,29 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
- * Version details for the site outcomes report
+ * Privacy Subsystem implementation for report_siteoutcomes.
  *
  * @package    report_siteoutcomes
- * @since      Moodle 3.3
- * @copyright  2017 Matthew Davidson
+ * @copyright  Matthew Davidson
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
+namespace report_siteoutcomes\privacy;
 defined('MOODLE_INTERNAL') || die();
-
-$plugin->version   = 2018051600;            // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2015111600;            // Requires Moodle 3.x.
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '3.5';
-$plugin->component = 'report_siteoutcomes';
+/**
+ * Privacy Subsystem for report_siteoutcomes implementing null_provider.
+ *
+ * @copyright  Matthew Davidson
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class provider implements \core_privacy\local\metadata\null_provider {
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
+}
