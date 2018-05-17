@@ -23,6 +23,9 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+// Privacy strings.
+$string['privacy:metadata'] = 'The plugin does not contain user data.';
+
 $string['siteoutcomes:view'] = 'View Site Outcomes report';
 $string['addoutcome'] = 'Add an outcome';
 $string['categorytitle'] = 'Category Outcomes Report';
